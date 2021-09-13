@@ -2,12 +2,12 @@
 
 1. Download and install the Arduino IDE
   
-  * *Recommended*: Arduino IDE 2.0 beta (scroll down, it will be under
+   * *Recommended*: Arduino IDE 2.0 beta (scroll down, it will be under
     "Experimental Software"
   
-  * Alternative: Arduino IDE 1.8.16 - use this if 2.0 isn't working right
+   * Alternative: Arduino IDE 1.8.16 - use this if 2.0 isn't working right
   
-  * Chromebook Users: Use the web editor
+   * Chromebook Users: Use the web editor
 
 2. Open the Arduino IDE
 
@@ -17,7 +17,7 @@
 
 5. Install "Arduino SAM Boards (32-bits ARM Cortex-M3)".
 
-  * This is the Due
+   * This is the Due
 
 6. On this webpage, click Code > Download ZIP to save this repository
    to your computer.
