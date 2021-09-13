@@ -1,6 +1,6 @@
 # Setup and Getting Started
 
-1. Download and install the Arduino IDE
+1. Download and install the Arduino IDE: https://www.arduino.cc/en/software
   
    * *Recommended*: Arduino IDE 2.0 beta (scroll down, it will be under
     "Experimental Software")
