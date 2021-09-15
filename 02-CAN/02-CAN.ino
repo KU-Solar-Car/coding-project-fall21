@@ -45,5 +45,14 @@ void onCanRx(CAN_FRAME* frame) {
  * Exercise 2: The Arduino at the other end of the CAN Bus is sending a secret number. Get that secret number
  * from the CAN frame and print it in the line that says "What goes in the parenthesis?"
  * 
+ * Exercise 3: Notice that there are two different lengths of messages being sent, 1 and 2.
+ * The length field represents the number of bytes in the message. Therefore, one of the
+ * messages is 1 byte long (8 bits), and the other is 2 bytes long (16 bits).
+ * Each message is intended to represent a single number.
+ * Your goal, then, is to extract the 1-byte-long message into a variable of the type 
+ * uint8_t, and the 2-byte-long message into a variable of the type uint16_t, and then
+ * print both to the serial monitor. Hint: The 2-byte-long message will require you to
+ * use the bit shift (<<) operator.
+ * 
  * Extra Credit: What do you think the line Can0.setGeneralCallback(onCanRx) does?
  */
