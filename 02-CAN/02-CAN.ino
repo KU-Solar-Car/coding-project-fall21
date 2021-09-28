@@ -1,13 +1,18 @@
 #include "due_can.h"
 
+static CAN_FRAME rxBuff;
+
 void setup() {
   Serial.begin(9600);
   Can0.begin();
-  Can0.setGeneralCallback(onCanRx);
 }
 
 void loop() {
-  
+  if (Can0.rx_avail())
+  {
+    Can0.read(rxBuff);
+    onCanRx(&rxBuff);
+  }
 }
 
 void onCanRx(CAN_FRAME* frame) {
@@ -25,11 +30,12 @@ void onCanRx(CAN_FRAME* frame) {
 
   // ====================================
   // Your part
-  if (frame->id == 0x00)
+  if (frame->id == 0x07)
   {
-    Serial.print("The secret number is: ");
-    Serial.println(); // What goes in the parenthesis?
+    // Do something with the frame if the id is 0x07
   }
+
+  // Do something with the frame if the id is 0x08
 }
 
 /*
@@ -38,21 +44,18 @@ void onCanRx(CAN_FRAME* frame) {
  * Connect the Green CAN wire to CAN_H (high) and the White CAN wire to CAN_L (low) on the Arduino.
  * Use CAN0. Upload this program to the Arduino and watch what happens.
  * 
- * Exercise 1: There is some code written to tell the user nicely that there is a secret number, but it
- * doesn't seem to be running at all. See if you can find the problem and fix it. Your resources are
- * the code that prints all CAN frames and/or the due_can tutorial: https://github.com/collin80/due_can/blob/master/howtouse.txt
- * 
- * Exercise 2: The Arduino at the other end of the CAN Bus is sending a secret number. Get that secret number
- * from the CAN frame and print it in the line that says "What goes in the parenthesis?"
- * 
- * Exercise 3: Notice that there are two different lengths of messages being sent, 1 and 2.
- * The length field represents the number of bytes in the message. Therefore, one of the
- * messages is 1 byte long (8 bits), and the other is 2 bytes long (16 bits).
- * Each message is intended to represent a single number.
- * Your goal, then, is to extract the 1-byte-long message into a variable of the type 
- * uint8_t, and the 2-byte-long message into a variable of the type uint16_t, and then
- * print both to the serial monitor. Hint: The 2-byte-long message will require you to
- * use the bit shift (<<) operator.
- * 
- * Extra Credit: What do you think the line Can0.setGeneralCallback(onCanRx) does?
+ * Exercise 1: A numeric value is being transmitted on CAN ID 0x07. The code is already
+ * written to print this number as hex to the serial monitor. Now, write code that will
+ * print this number as decimal in the block that says if (frame->id == 0x07)...
+ *
+ * Hint: The data of a CAN message is stored in frame->data.bytes[i]. The type of this
+ * is uint8_t (unsigned 8-bit integer), which is already a numeric data type, so you don't
+ * need to convert.
+ *
+ * Exercise 2: Another numeric value is being transmitted on CAN ID 0x08. In a new if block
+ * below the one you just wrote, print this value to the Serial monitor.
+ *
+ * Hint: This is a little bit trickier because the value is now two bytes long. You will
+ * need to use bit shifting in order to put these two bytes in a uint16_t (16-bit unsigned
+ * integer).
  */
