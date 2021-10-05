@@ -7,6 +7,7 @@ const int LED_PIN = 2;
 void setup() {
   Serial.begin(9600);
   Can0.begin();
+  Can0.watchFor();
   pinMode(LED_PIN, OUTPUT);
 }
 

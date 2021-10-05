@@ -5,6 +5,7 @@ static CAN_FRAME rxBuff;
 void setup() {
   Serial.begin(9600);
   Can0.begin();
+  Can0.watchFor();
 }
 
 void loop() {
